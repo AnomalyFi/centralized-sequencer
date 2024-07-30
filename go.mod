@@ -1,4 +1,4 @@
-module github.com/rollkit/centralized-sequencer
+module github.com/AnomalyFi/centralized-sequencer
 
 go 1.22.0
 
