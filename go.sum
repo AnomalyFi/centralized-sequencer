@@ -1,6 +1,6 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
-github.com/AnomalyFi/avalanchego v1.10.10-beta.2 h1:834Wu95CB7BKMOb10+MD4U2qZfl4jAOgtuGC9lxSJyw=
-github.com/AnomalyFi/avalanchego v1.10.10-beta.2/go.mod h1:WsVfXvqJmLr7cuCTbQJd/TgUaa6zd9I2f9MCtCuhxLw=
+github.com/AnomalyFi/avalanchego v1.10.10-beta.2 h1:ONf6k+tjj2+/QywGBmvgzqnah7NrkahviFjkGXwgoK0=
+github.com/AnomalyFi/avalanchego v1.10.10-beta.2/go.mod h1:5mYxRxUmoDrd3Ss/LDXuTK6LN66V7nRiEFV0cXd6p0s=
 github.com/AnomalyFi/go-sequencing v0.0.1 h1:FMtaRta9DO0nxmmDi8sh505m9Uzjrs/hGLFs1gkoGBk=
 github.com/AnomalyFi/go-sequencing v0.0.1/go.mod h1:J6E6NR7tNJ0cKBxtVHnby0hQ+S7RTayuDfG1Llwv800=
 github.com/AnomalyFi/hypersdk v0.9.3 h1:SRzuMx6VUBopG4s6060RHMtbkhnfn4UXskht8/GJcaE=
