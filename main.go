@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/rollkit/centralized-sequencer/sequencing"
+	"github.com/AnomalyFi/centralized-sequencer/sequencing"
 	sequencingGRPC "github.com/rollkit/go-sequencing/proxy/grpc"
 )
 
