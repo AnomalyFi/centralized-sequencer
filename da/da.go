@@ -13,7 +13,7 @@ import (
 	logging "github.com/ipfs/go-log/v2"
 
 	goDA "github.com/rollkit/go-da"
-	"github.com/rollkit/go-sequencing"
+	"github.com/AnomalyFi/go-sequencing"
 	"github.com/rollkit/rollkit/types"
 	pb "github.com/rollkit/rollkit/types/pb/rollkit"
 )
