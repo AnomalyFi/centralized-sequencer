@@ -8,14 +8,20 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
-	"github.com/AnomalyFi/centralized-sequencer/sequencing"
+	// TODO: if i change path below to .../AnomalyFi/..., 
+	// I get type errors despite having the same functions
+	// figure out why
+	"github.com/rollkit/centralized-sequencer/sequencing"
 	sequencingGRPC "github.com/rollkit/go-sequencing/proxy/grpc"
 )
 
 const (
-	defaultHost = "localhost"
-	defaultPort = "50051"
+	defaultHost      = "localhost"
+	defaultPort      = "50051"
+	defaultBatchTime = time.Duration(2 * time.Second)
+	defaultDA        = "http://localhost:25568"
 )
 
 func main() {
@@ -23,28 +29,32 @@ func main() {
 		host          string
 		port          string
 		listenAll     bool
-		batchTime     int64
+		batchTime     time.Duration
+		da_address    string
 		da_namespace  string
 		da_auth_token string
 	)
-	flag.StringVar(&port, "port", defaultPort, "listening port")
-	flag.StringVar(&host, "host", defaultHost, "listening address")
-	flag.Int64Var(&batchTime, "batch-time", 2, "time in seconds to wait before generating a new batch")
+	flag.StringVar(&host, "host", defaultHost, "centralized sequencer host")
+	flag.StringVar(&port, "port", defaultPort, "centralized sequencer port")
+	flag.BoolVar(&listenAll, "listen-all", false, "listen on all network interfaces (0.0.0.0) instead of just localhost")
+	flag.DurationVar(&batchTime, "batch-time", defaultBatchTime, "time in seconds to wait before generating a new batch")
+	flag.StringVar(&da_address, "da_address", defaultDA, "DA address")
 	flag.StringVar(&da_namespace, "da_namespace", "", "DA namespace where the sequencer submits transactions")
 	flag.StringVar(&da_auth_token, "da_auth_token", "", "auth token for the DA")
-	flag.BoolVar(&listenAll, "listen-all", false, "listen on all network interfaces (0.0.0.0) instead of just localhost")
+
 	flag.Parse()
 
 	if listenAll {
 		host = "0.0.0.0"
 	}
 
-	lis, err := net.Listen("tcp", ":50051")
+	address := fmt.Sprintf("%s:%s", host, port)
+	lis, err := net.Listen("tcp", address)
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
-	seq := sequencing.NewSEQClient("uri", "chainID")
-	centralizedSeq, err := sequencing.NewSequencer("daAddr","daAuthToken","daNamespace", seq)
+	// seq := sequencing.NewSEQClient("uri", "chainID")
+	centralizedSeq, err := sequencing.NewSequencer(da_address, da_auth_token, da_namespace, batchTime)
 	if err != nil {
 		log.Fatalf("Failed to create centralized sequencer: %v", err)
 	}
