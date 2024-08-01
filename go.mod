@@ -10,9 +10,10 @@ require (
 	github.com/gogo/protobuf v1.3.3
 	github.com/ipfs/go-log/v2 v2.5.1
 	github.com/rollkit/go-da v0.5.0
-	github.com/rollkit/go-sequencing v0.0.0-20240719145307-0166b8267e96
 	github.com/rollkit/rollkit v0.13.6
 )
+
+require github.com/rollkit/go-sequencing v0.0.0-20240719145307-0166b8267e96
 
 require (
 	github.com/AnomalyFi/go-sequencing v0.0.2
