@@ -366,9 +366,13 @@ func (c *Sequencer) SubmitRollupTransaction(ctx context.Context, rollupId []byte
 func (c *Sequencer) GetNextBatch(ctx context.Context, lastBatch sequencing.Batch) (sequencing.Batch, error) {
 	// declare var(s)
 	var nextBatch sequencing.Batch
-
+	
 	// might not need below for our case but could be wrong
 	batch := c.bq.Next()
+	if batch == nil {
+		// TODO: need to update go sequencing to be up to date 
+		return sequencing.Batch{}, fmt.Errorf("batch is nil")
+	}
 	batchBytes, err := batch.Marshal()
 	if err != nil {
 		return sequencing.Batch{}, err

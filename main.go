@@ -53,8 +53,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
-	// seq := sequencing.NewSEQClient("uri", "chainID")
-	centralizedSeq, err := sequencing.NewSequencer(da_address, da_auth_token, da_namespace, batchTime)
+	seq := sequencing.NewSEQClient("uri", "chainID")
+	centralizedSeq, err := sequencing.NewSequencer(da_address, da_auth_token, da_namespace, seq)
 	if err != nil {
 		log.Fatalf("Failed to create centralized sequencer: %v", err)
 	}
