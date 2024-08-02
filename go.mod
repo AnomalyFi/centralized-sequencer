@@ -155,6 +155,8 @@ replace (
 	github.com/ava-labs/avalanchego => github.com/AnomalyFi/avalanchego v1.10.10-beta.2
 	github.com/ava-labs/coreth => github.com/AnomalyFi/coreth v0.12.5-rc.6.1
 	github.com/gogo/protobuf => github.com/gogo/protobuf v1.3.2
+	github.com/rollkit/centralized-sequencer v0.0.0-20240729065046-38f6528ab606 => github.com/AnomalyFi/centralized-sequencer v0.0.2
 	github.com/rollkit/go-sequencing v0.0.0-20240719145307-0166b8267e96 => github.com/AnomalyFi/go-sequencing v0.0.1
+
 	github.com/tidwall/btree => github.com/tidwall/btree v1.5.0
 )

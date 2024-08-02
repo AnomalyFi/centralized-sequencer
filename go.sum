@@ -1,6 +1,8 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/AnomalyFi/avalanchego v1.10.10-beta.2 h1:ONf6k+tjj2+/QywGBmvgzqnah7NrkahviFjkGXwgoK0=
 github.com/AnomalyFi/avalanchego v1.10.10-beta.2/go.mod h1:5mYxRxUmoDrd3Ss/LDXuTK6LN66V7nRiEFV0cXd6p0s=
+github.com/AnomalyFi/centralized-sequencer v0.0.2 h1:xQQbE/Y/+L2scU9lHZvIqvxcdlGrt1KhDQlUukyDvTM=
+github.com/AnomalyFi/centralized-sequencer v0.0.2/go.mod h1:1fPATs4Sad++DxtIFhAr3Nk67f3a6g0e0B9foEXP2/w=
 github.com/AnomalyFi/go-sequencing v0.0.1 h1:FMtaRta9DO0nxmmDi8sh505m9Uzjrs/hGLFs1gkoGBk=
 github.com/AnomalyFi/go-sequencing v0.0.1/go.mod h1:J6E6NR7tNJ0cKBxtVHnby0hQ+S7RTayuDfG1Llwv800=
 github.com/AnomalyFi/go-sequencing v0.0.2 h1:yIWXD2WEen6WFrlJMTV16J+l445Qq2a5NycLo+kpMTE=
@@ -482,8 +484,6 @@ github.com/rivo/uniseg v0.4.4 h1:8TfxU8dW6PdqD27gjM8MVNuicgxIjxpm4K7x4jp8sis=
 github.com/rivo/uniseg v0.4.4/go.mod h1:FN3SvrM+Zdj16jyLfmOkMNblXMcoc8DfTHruCPUcx88=
 github.com/rogpeppe/go-internal v1.11.0 h1:cWPaGQEPrBb5/AsnsZesgZZ9yb1OQ+GOISoDNXVBh4M=
 github.com/rogpeppe/go-internal v1.11.0/go.mod h1:ddIwULY96R17DhadqLgMfk9H9tvdUzkipdSkR5nkCZA=
-github.com/rollkit/centralized-sequencer v0.0.0-20240729065046-38f6528ab606 h1:wSbtHgSdglNrM0dzmHeSjvtUxkymg5ThoApRevnRsHU=
-github.com/rollkit/centralized-sequencer v0.0.0-20240729065046-38f6528ab606/go.mod h1:dz1cPAjBfAc0jTXtrZTMLI5X4YaDT2lU6lZ8i5KPmG4=
 github.com/rollkit/go-da v0.5.0 h1:sQpZricNS+2TLx3HMjNWhtRfqtvVC/U4pWHpfUz3eN4=
 github.com/rollkit/go-da v0.5.0/go.mod h1:VsUeAoPvKl4Y8wWguu/VibscYiFFePkkrvZWyTjZHww=
 github.com/rollkit/rollkit v0.13.6 h1:ZdIBG5D5RuQvnnJSY8s3m46dR3A3F6jHN+01zX+Avt0=
