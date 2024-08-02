@@ -116,7 +116,7 @@ func (tq *TransactionQueue) AddTransaction(tx sequencing.Tx) {
 }
 
 // GetNextBatch extracts a batch of transactions from the queue
-func (tq *TransactionQueue) GetNextBatch(max uint64) *sequencing.Batch {
+func (tq *TransactionQueue) GetNextBatch(max uint64) sequencing.Batch {
 	tq.mu.Lock()
 	defer tq.mu.Unlock()
 
