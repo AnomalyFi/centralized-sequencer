@@ -116,7 +116,7 @@ func (tq *TransactionQueue) AddTransaction(tx sequencing.Tx) {
 }
 
 // GetNextBatch extracts a batch of transactions from the queue
-func (tq *TransactionQueue) GetNextBatch(max uint64) sequencing.Batch {
+func (tq *TransactionQueue) GetNextBatch(max uint64) *sequencing.Batch {
 	tq.mu.Lock()
 	defer tq.mu.Unlock()
 
@@ -318,7 +318,7 @@ func hashSHA256(data []byte) []byte {
 }
 
 // SubmitRollupTransaction implements sequencing.Sequencer.
-func (c *Sequencer) SubmitRollupTransaction(ctx context.Context, rollupId []byte, tx []byte) error {
+func (c *Sequencer) SubmitRollupTransaction(ctx context.Context, rollupId []byte, tx []byte) (error) {
 	if c.rollupId == nil {
 		c.rollupId = rollupId
 	} else {
@@ -363,23 +363,30 @@ func (c *Sequencer) SubmitRollupTransaction(ctx context.Context, rollupId []byte
 }
 
 // GetNextBatch implements sequencing.Sequencer.
-func (c *Sequencer) GetNextBatch(ctx context.Context, lastBatch sequencing.Batch) (sequencing.Batch, error) {
+func (c *Sequencer) GetNextBatch(ctx context.Context, lastBatch *sequencing.Batch) (*sequencing.Batch, error) {
 	// declare var(s)
-	var nextBatch sequencing.Batch
+	var nextBatch *sequencing.Batch
 	
-	// might not need below for our case but could be wrong
+	// check the lastBatchHash to match the hash of the supplied lastBatch
+	if lastBatch == nil && c.lastBatchHash != nil {
+		return nil, errors.New("lastBatch is not supposed to be nil")
+	}
+	lastBatchBytes, err := lastBatch.Marshal()
+	if err != nil {
+		return nil, err
+	}
+	lastBatchHash := hashSHA256(lastBatchBytes)
+	if !bytes.Equal(c.lastBatchHash, lastBatchHash) {
+		return nil, errors.New("supplied lastBatch does not match with sequencer last batch")
+	}
 	batch := c.bq.Next()
 	if batch == nil {
-		// TODO: need to update go sequencing to be up to date 
-		return sequencing.Batch{}, fmt.Errorf("batch is nil")
+		return nil, nil
 	}
 	batchBytes, err := batch.Marshal()
 	if err != nil {
-		return sequencing.Batch{}, err
+		return nil, err
 	}
-	c.lastBatchHash = hashSHA256(batchBytes)
-	c.seenBatches[string(c.lastBatchHash)] = struct{}{}
-
 	// note: lastBatch will need to include the tx(s) from SEQ
 	blockHeight = lastBatch.Height
 	binary.LittleEndian.PutUint64(rollupNamespace, rollupChainID)
@@ -404,7 +411,7 @@ func (c *Sequencer) GetNextBatch(ctx context.Context, lastBatch sequencing.Batch
 		// 3: extract tx(s) using height of the current block and namespace of rollup
 		nsResp, err := c.client.seqClient.GetBlockTransactionsByNamespace(ctx, block.Height, string(rollupNamespace))
 		if err != nil {
-			return sequencing.Batch{}, fmt.Errorf("Error retrieving namespace tx(s) by height")
+			return nil, err
 		}
 		// 4: after tx(s) are extracted, we append tx(s) to the next batch
 		for _, tx := range nsResp.Txs {
@@ -412,13 +419,15 @@ func (c *Sequencer) GetNextBatch(ctx context.Context, lastBatch sequencing.Batch
 		}
 	}
 
+	c.lastBatchHash = hashSHA256(batchBytes)
+	c.seenBatches[string(c.lastBatchHash)] = struct{}{}
 	// 5: return next batch
 	return nextBatch, nil
 
 }
 
 // VerifyBatch implements sequencing.///////////////¬≥':????????Sequencer.
-func (c *Sequencer) VerifyBatch(ctx context.Context, batch sequencing.Batch) (bool, error) {
+func (c *Sequencer) VerifyBatch(ctx context.Context, batch *sequencing.Batch) (bool, error) {
 	//TODO: need to add DA verification
 	batchBytes, err := batch.Marshal()
 	if err != nil {

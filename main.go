@@ -13,8 +13,8 @@ import (
 	// TODO: if i change path below to .../AnomalyFi/..., 
 	// I get type errors despite having the same functions
 	// figure out why
-	"github.com/rollkit/centralized-sequencer/sequencing"
-	sequencingGRPC "github.com/rollkit/go-sequencing/proxy/grpc"
+	"github.com/AnomalyFi/centralized-sequencer/sequencing"
+	sequencingGRPC "github.com/AnomalyFi/go-sequencing/proxy/grpc"
 )
 
 const (
@@ -54,7 +54,7 @@ func main() {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 	seq := sequencing.NewSEQClient("uri", "chainID")
-	centralizedSeq, err := sequencing.NewSequencer(da_address, da_auth_token, da_namespace, seq)
+	centralizedSeq, err := sequencing.NewSequencer(da_address, da_auth_token, da_namespace, batchTime, seq)
 	if err != nil {
 		log.Fatalf("Failed to create centralized sequencer: %v", err)
 	}
