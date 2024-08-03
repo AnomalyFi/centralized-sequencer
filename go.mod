@@ -5,6 +5,7 @@ go 1.22.3
 toolchain go1.22.4
 
 require (
+	github.com/AnomalyFi/go-sequencing v0.0.3
 	github.com/AnomalyFi/nodekit-relay v1.1.2
 	github.com/AnomalyFi/seq-sdk v0.1.3
 	github.com/gogo/protobuf v1.3.3
@@ -13,10 +14,7 @@ require (
 	github.com/rollkit/rollkit v0.13.6
 )
 
-require github.com/rollkit/go-sequencing v0.0.0-20240719145307-0166b8267e96 // indirect
-
 require (
-	github.com/AnomalyFi/go-sequencing v0.0.2
 	github.com/AnomalyFi/hypersdk v0.9.3 // indirect
 	github.com/AnomalyFi/nodekit-seq v0.9.8 // indirect
 	github.com/DataDog/zstd v1.5.2 // indirect
@@ -155,7 +153,5 @@ replace (
 	github.com/ava-labs/coreth => github.com/AnomalyFi/coreth v0.12.5-rc.6.1
 	github.com/gogo/protobuf => github.com/gogo/protobuf v1.3.2
 	github.com/rollkit/centralized-sequencer v0.0.0-20240729065046-38f6528ab606 => github.com/AnomalyFi/centralized-sequencer v0.0.2
-	github.com/rollkit/go-sequencing v0.0.0-20240719145307-0166b8267e96 => github.com/AnomalyFi/go-sequencing v0.0.1
-
 	github.com/tidwall/btree => github.com/tidwall/btree v1.5.0
 )

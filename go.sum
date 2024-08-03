@@ -1,10 +1,8 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/AnomalyFi/avalanchego v1.10.10-beta.2 h1:ONf6k+tjj2+/QywGBmvgzqnah7NrkahviFjkGXwgoK0=
 github.com/AnomalyFi/avalanchego v1.10.10-beta.2/go.mod h1:5mYxRxUmoDrd3Ss/LDXuTK6LN66V7nRiEFV0cXd6p0s=
-github.com/AnomalyFi/go-sequencing v0.0.1 h1:FMtaRta9DO0nxmmDi8sh505m9Uzjrs/hGLFs1gkoGBk=
-github.com/AnomalyFi/go-sequencing v0.0.1/go.mod h1:J6E6NR7tNJ0cKBxtVHnby0hQ+S7RTayuDfG1Llwv800=
-github.com/AnomalyFi/go-sequencing v0.0.2 h1:o2pQhfHqA0x4WYJ/ecxxcb6ROaM/+UzaxYeQljZOFos=
-github.com/AnomalyFi/go-sequencing v0.0.2/go.mod h1:Ch4vfnZT23Rh5/Z3I5Pw9nVocZklhOolC2rU85Jtrfo=
+github.com/AnomalyFi/go-sequencing v0.0.3 h1:tIhpgczaOn1gK8V+6j11zaJQhl/lHANwX0Y86NIyowY=
+github.com/AnomalyFi/go-sequencing v0.0.3/go.mod h1:/ITBxG8nSTkv7h6aGo3O6JwxDgCDm7ebANv2dtJoov0=
 github.com/AnomalyFi/hypersdk v0.9.3 h1:SRzuMx6VUBopG4s6060RHMtbkhnfn4UXskht8/GJcaE=
 github.com/AnomalyFi/hypersdk v0.9.3/go.mod h1:ygZ/2T0Td1RPjyTpsCHGJnLlmk7nCYQJSpgQPANaocE=
 github.com/AnomalyFi/nodekit-relay v1.1.2 h1:+TSyBWw6iVmZJZPWAgWmlshM0JWLxQcry6ItgFbXt+E=
