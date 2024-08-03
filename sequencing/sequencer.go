@@ -364,30 +364,32 @@ func (c *Sequencer) SubmitRollupTransaction(ctx context.Context, rollupId []byte
 
 // GetNextBatch implements sequencing.Sequencer.
 func (c *Sequencer) GetNextBatch(ctx context.Context, lastBatch *sequencing.Batch) (*sequencing.Batch, error) {
-	// declare var(s)
-	var nextBatch *sequencing.Batch
-	
 	// check the lastBatchHash to match the hash of the supplied lastBatch
 	if lastBatch == nil && c.lastBatchHash != nil {
 		return nil, errors.New("lastBatch is not supposed to be nil")
 	}
+	// bytes of last batch
 	lastBatchBytes, err := lastBatch.Marshal()
 	if err != nil {
 		return nil, err
 	}
+	// last batch hash
 	lastBatchHash := hashSHA256(lastBatchBytes)
 	if !bytes.Equal(c.lastBatchHash, lastBatchHash) {
 		return nil, errors.New("supplied lastBatch does not match with sequencer last batch")
 	}
+	// next batch in batch queue 
 	batch := c.bq.Next()
 	if batch == nil {
 		return nil, nil
 	}
+	// bytes of next batch
 	batchBytes, err := batch.Marshal()
 	if err != nil {
 		return nil, err
 	}
 	// note: lastBatch will need to include the tx(s) from SEQ
+	// use height from last batch
 	blockHeight = lastBatch.Height
 	binary.LittleEndian.PutUint64(rollupNamespace, rollupChainID)
 	// 1: take in blocks from height of lastBatch up until user made request(end)
@@ -415,14 +417,14 @@ func (c *Sequencer) GetNextBatch(ctx context.Context, lastBatch *sequencing.Batc
 		}
 		// 4: after tx(s) are extracted, we append tx(s) to the next batch
 		for _, tx := range nsResp.Txs {
-			nextBatch.Transactions = append(nextBatch.Transactions, tx.Transaction)
+			batch.Transactions = append(batch.Transactions, tx.Transaction)
 		}
 	}
 
 	c.lastBatchHash = hashSHA256(batchBytes)
 	c.seenBatches[string(c.lastBatchHash)] = struct{}{}
 	// 5: return next batch
-	return nextBatch, nil
+	return batch, nil
 
 }
 
@@ -444,7 +446,7 @@ func (c *Sequencer) VerifyBatch(ctx context.Context, batch *sequencing.Batch) (b
 	// 1: take batch which has array of tx, namespace, and height and get transactions by namepsace & height.
 	nsResp, err := c.client.seqClient.GetBlockTransactionsByNamespace(ctx, batch.Height, string(batch.Namespace))
 	if err != nil {
-		fmt.Errorf("Error retrieving namespace tx(s) by height")
+		return false, fmt.Errorf("Error retrieving namespace tx(s) by height")
 	}
 	// 2: compare batch object(batchTx) with seq tx response(seqTx) so essentially comparing both tx arrays
 	for _, batchTx := range batch.Transactions {
