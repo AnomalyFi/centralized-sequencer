@@ -341,10 +341,11 @@ func (c *Sequencer) SubmitRollupTransaction(ctx context.Context, rollupId []byte
 	data = append(data, tx)
 	// submit data, which includes tx, to SEQ
 	// test with rollupNamespace or see if rollupId works on its own
-	_, err := c.client.seqClient.SubmitTx(ctx, chainID, 1337, rollupNamespace, data)
+	rollupTx, err := c.client.seqClient.SubmitTx(ctx, chainID, 1337, rollupNamespace, data)
 	if err != nil {
 		fmt.Errorf("Error submitting tx(s) to SEQ: %v\n", err)
 	}
+	fmt.Printf("txs to seq", rollupTx)
 
 	duplicate := false
 	c.tq.mu.Lock()
